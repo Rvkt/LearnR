@@ -1,0 +1,320 @@
+---
+title: "Webinar-1 September 14 2024"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+#### Execute the following cells to load the libraries
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+#### Creating homeogenous datastructures: vectors and matrices (built on the fundamental datatypes character, numeric, integer, and logical)
+
+## In R, a vector is one of the most basic data structures. It is a sequence of elements that are all of the same type. You can think of a vector as a one-dimensional array that holds data, and it plays a key role in data manipulation and analysis in R.
+
+```{r}
+
+
+num_vec <- c(1.2, 3.5, 7.8)
+# print(num_vec)
+num_vec2 = seq(1, 10, by = 0.5)
+print(num_vec2)
+
+
+int_vec <- c(1L, 2L, 3L)  # 'L' indicates the number is an integer
+# print(int_vec)
+
+int_vector = 1:10
+# print(int_vector)
+
+
+char_vec <- c("apple", "banana", "cherry")
+# print(char_vec)
+
+log_vec <- c(TRUE, FALSE, TRUE)
+# print(log_vec)
+
+
+
+
+
+```
+
+```{r}
+
+
+
+# Create a 2D matrix with 2 rows and 3 columns
+matrix_2d = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3)
+
+# Print the matrix
+print(matrix_2d)
+
+
+# Create a 2D matrix filled by rows
+matrix_2d_byrow <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
+
+# Print the matrix
+print(matrix_2d_byrow)
+
+
+matrix_2d[1, 2]  # Accesses the element in the first row, second column (returns 3)
+
+```
+
+```{r}
+
+# Using rbind to create a matrix by binding rows
+matrix_rbind <- rbind(c(1, 2, 3), c(4, 5, 6))
+print(matrix_rbind)
+
+
+# Using cbind to create a matrix by binding columns
+matrix_cbind <- cbind(c(1, 4), c(2, 5), c(3, 6))
+print(matrix_cbind)
+
+
+
+```
+
+```{r}
+
+# Create a 3x3 matrix
+mat <- matrix(1:9, nrow = 3, byrow = TRUE)
+
+# Extract the first row as a vector
+first_row_vector <- mat[1, ]
+
+print(first_row_vector)  # Prints the vector
+print(class(first_row_vector))  # Shows the data type (vector)
+print(first_row_vector)
+
+
+```
+
+```{r}
+
+# Create a sequence from 1 to 10 with a step of 0.5
+num_vec2=seq(1, 10, by = 0.5)
+
+# Create a matrix using the sequence with 4 rows and 5 columns
+matrix_seq= matrix(num_vec2, nrow = 4, ncol = 5)
+
+# Print the matrix
+print(matrix_seq)
+
+```
+
+#### Creating a list, a heterogenous datastructure
+
+```{r}
+
+
+# Create a list with different data types
+my_list <- list("R Programming", 123, TRUE, c(1, 2, 3))
+
+# Print the list
+print(my_list)
+str(my_list)
+
+# Lists are indexed by double square brackets [[ ]], and each element is displayed separately.
+
+
+
+# Create a named list
+my_list_named <- list(course = "R Programming", version = 4.0, completed = TRUE)
+
+# Print the named list
+print(my_list_named)
+
+
+
+# Create a nested list
+nested_list = list(a = 1, b = list(c = 2, d = "Nested List"))
+
+# Access an element in the nested list
+nested_list$b$c  # Returns 2
+
+
+
+
+```
+
+```{r}
+
+# Combine two lists
+list1 <- list(1, 2, 3)
+list2 <- list("A", "B", "C")
+combined_list <- c(list1, list2)
+
+# Print the combined list
+print(combined_list)
+
+
+
+# Flatten a list
+flattened_list <- unlist(combined_list)
+
+# Print the flattened list
+print(flattened_list)
+
+
+length(combined_list)  # Returns 4
+lapply(combined_list, class)  # Returns the class/type of each element in the list
+sapply(combined_list, class)
+
+
+
+
+```
+
+#### Accessing elements of a datastructure
+
+```{r}
+```
+
+#### Loading data into a dataframe, a heterogenous datastructure
+
+```{r}
+
+
+
+file = 'Data/food-texture.csv'
+foodData = read.csv(file, header = TRUE, row.names = 1)
+
+
+#str(foodData)
+
+# Summary statistics of the dataset
+# summary(foodData)
+
+# Check for missing values
+# colSums(is.na(foodData))
+
+
+# Mean of 'Oil' column
+mean(foodData$Oil, na.rm = TRUE)
+
+# Median of 'Density' column
+median(foodData$Density, na.rm = TRUE)
+
+
+
+
+
+# head(foodData, 2)
+
+```
+
+#### Attributes of a dataframe
+
+```{r}
+```
+
+#### Get the data type and the data structure associated with an object
+
+```{r}
+```
+
+#### Accessing elements of a data frame in a particular column
+
+```{r}
+
+foodData$Oil
+foodData[['Oil']] # reverse in python
+foodData[, 'Oil'] # reverse in python
+
+foodData['Oil'] # return a dataframe of foodData Dataframe.
+foodData[[1]]
+
+```
+
+#### Accessing elements of multiple columns of a dataframe (using base R and dplyr)
+
+```{r}
+
+library(dplyr)
+
+summary_stats <- foodData %>%
+  summarise(
+    Mean_Oil = mean(Oil, na.rm = TRUE),
+    Median_Oil = median(Oil, na.rm = TRUE),
+    Mean_Density = mean(Density, na.rm = TRUE),
+    Median_Density = median(Density, na.rm = TRUE),
+    Mean_Crispy = mean(Crispy, na.rm = TRUE),
+    Mean_Fracture = mean(Fracture, na.rm = TRUE),
+    Mean_Hardness = mean(Hardness, na.rm = TRUE),
+    Range_Oil = range(Oil, na.rm = TRUE),
+    Range_Density = range(Density, na.rm = TRUE)
+  )
+
+print(summary_stats)
+
+```
+
+#### For-loop and if-statement
+
+```{r}
+```
+
+#### User-defined function
+
+```{r}
+
+```
+
+#### Calling the user-defined function
+
+```{r}
+```
+
+#### Matrix example - judges problem
+
+```{r}
+```
+
+#### Court incorrect probability
+
+```{r}
+```
+
+#### Accessing rows of a dataframe satisfying certain conditions
+
+```{r}
+```
+
+#### Accessing row of a dataframe satisfying certain condition and particular columns
+
+```{r}
+```
+
+#### Accessing rows of a dataframe satisfying certain conditions
+
+```{r}
+```
+
+#### Modifying a column of a dataframe
+
+```{r}
+```
+
+#### Modify Crispy column to reflect high (0) or low (1) crispiness
+
+```{r}
+
+```
+
+##### Change Crispy and Crispylevel columns to factor (categorical) type
+
+```{r}
+# Continuous features -> Oil, Density, Hardness, Fracture
+# Categorical features -> Crispy (8 levels 8 through 15) and Crispylevel (2 levels 0 and 1)
+# Crispy is a categorical feature with an order
+```
