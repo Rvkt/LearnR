@@ -1,6 +1,6 @@
-# Notes on Variables in R
+# Variables:
 
-## Overview of Variables in R
+## Overview
 
 Variables in R are fundamental components used to store data that can be manipulated throughout a program. Unlike many other programming languages, R does not require explicit declaration of variables; they are created upon assignment.
 
@@ -9,11 +9,14 @@ Variables in R are fundamental components used to store data that can be manipul
 When creating variable names in R, several rules must be followed:
 
 -   **Start with a letter or a period**: Variable names must begin with a letter (a-z, A-Z) or a period (.), but if they start with a period, the next character cannot be a digit.
--   **Allowed characters**: Variable names can include letters, digits (0-9), periods (.), and underscores (\_).
--   **Case sensitivity**: Variable names are case-sensitive; for example, `age` and `Age` are considered different variables.
--   **No reserved words**: Certain keywords (e.g., `TRUE`, `FALSE`, `NULL`) cannot be used as variable names.
 
-### Examples of Valid and Invalid Variable Names
+-   **Allowed characters**: Variable names can include letters, digits (0-9), periods (.), and underscores (\_).
+
+-   **Case sensitivity**: Variable names are case-sensitive; for example, **`age`** and **`Age`** are considered different variables.
+
+-   **No reserved words**: Certain keywords (e.g., **`TRUE`**, **`FALSE`**, **`NULL`**) cannot be used as variable names.
+
+## **Examples of Valid and Invalid Variable Names**
 
 | Valid Names  | Invalid Names |
 |--------------|---------------|
@@ -22,21 +25,33 @@ When creating variable names in R, several rules must be followed:
 | `data_frame` | `_data`       |
 | `foo_bar`    | `TRUE`        |
 
-## Variable Assignment
+## **Variable Assignment**
 
-In R, variables can be assigned values using several operators:
+In **R** , variables can be assigned values using several operators:
 
-``` r
-## **Assignment Operator (`=`)**: Commonly used but can lead to confusion in certain contexts.
+-   Assignment Operator (`=`): Commonly used but can lead to confusion in certain contexts.
+
+```{r}
 x = 10
+```
 
-## Leftward Assignment (<-): Preferred method for assigning values.
+-   Leftward Assignment (\<-): Preferred method for assigning values.
+
+```{r}
 y <- "Hello"
 
-## Rightward Assignment (->): Less common but valid.
+```
+
+-   Rightward Assignment (-\>): Less common but valid.
+
+```{r}
 "World" -> z
+```
 
-## Variables can also be assigned multiple values simultaneously:
-a <- b <- c <- 0
-
+Variables can also be assigned multiple values simultaneously:
+```{r}
+a <- b <- c <- 10
+print(a)
+print(b)
+print(c)
 ```
