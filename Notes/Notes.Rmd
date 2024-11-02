@@ -49,9 +49,102 @@ y <- "Hello"
 ```
 
 Variables can also be assigned multiple values simultaneously:
+
 ```{r}
 a <- b <- c <- 10
 print(a)
 print(b)
 print(c)
 ```
+
+```{r}
+
+10 + 20
+10-20
+10*20
+10/20
+10^20
+10%%3
+
+```
+
+```{r}
+
+a <- b <- c <- 10
+
+(a+10) / b +2 * 8
+
+```
+
+```{r}
+
+sqrt(16)
+exp(1)
+abs(-9)
+ceiling(1.25)
+floor(1.25)
+round(1.57)
+
+```
+
+```{r}
+
+max(1, 2, 3, 4)
+min(1, 2, 3, 4)
+
+```
+
+## Numeric (Double Precision)
+
+-   This is the default type for numbers in R.
+-   It stores both integers and decimals as floating-point numbers with double precision (approximately 16 decimal digits).
+-   You can assign a number using `x <- 10` or `y <- 3.14`
+
+```{r}
+## Numeric Data Type
+
+x <- 10      # Integer, but treated as numeric (double)
+y <- 3.14    # Decimal number (double)
+class(x)     # Output: "numeric"
+class(y)     # Output: "numeric"
+
+
+```
+
+2.  Integer
+
+-   Integers are a specific type of numeric data, but they must be explicitly defined by adding an L after the number.
+-   These are stored as 32-bit signed integers.
+
+```{r}
+
+z <- 10L     # Integer type
+class(z)     # Output: "integer"
+
+# Without the L, even whole numbers are treated as numeric (double).
+
+```
+
+3.  Floating-Point Precision
+
+-   R uses 64-bit double-precision floating-point numbers, which allows high precision but can still result in rounding errors due to the limitations of floating-point arithmetic.
+
+4.  Type Conversion
+
+-   R can convert between types, such as converting a numeric value to an integer using the as.integer() function.
+
+```{r}
+
+a <- 10.7
+b <- as.integer(a)  # Convert to integer, output will be 10
+
+class(a)
+class(b)
+
+
+```
+
+```{r}
+
+```
+

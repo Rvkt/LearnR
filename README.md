@@ -38,5 +38,4 @@ y <- "Hello"
 
 ## Variables can also be assigned multiple values simultaneously:
 a <- b <- c <- 0
-
 ```

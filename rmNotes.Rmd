@@ -1,0 +1,159 @@
+---
+title: 'Introduction to the tidyverse and ggplot2 libraries'
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+Loading the data into `dataframes`
+
+```{r}
+
+file = 'Data/mtcars3.csv'
+carData = read.csv(file, header = TRUE, row.names = 1)
+summary(carData)
+
+```
+
+Print the first five rows in the data frame.
+
+```{r}
+
+head(carData, 5)
+
+```
+
+```{r}
+
+# Print the structure of the data frame
+str(carData)
+
+```
+
+```{r}
+
+# Print the names of the columns (feature or variables)
+colnames(carData)
+
+```
+
+```{r}
+
+# Print the names of the rows
+rownames(carData)
+
+
+```
+
+Print the number of samples (rows) and features (columns) in the data frame
+
+```{r}
+
+nrow(carData) # output 32 observations
+ncol(carData) # output 11 parameters or variables
+
+```
+
+Basic data management using the tidyverse package.
+
+```{r}
+
+# carData %>% mutate(cylType = 'High')
+
+# add new column `cylType` based on the condition.
+carData %>% mutate(cylType = ifelse(cyl > 6, "High", "Low"))
+
+
+# Add a new column called wtton
+carData %>% mutate(wtton = 0.45*wt)
+
+
+
+```
+
+```{r}
+# Create n new data frame with the columns cyltype and wtton are added.
+# If want to show the modifications we have to create a new data frame.
+carData.new = carData %>% mutate(cylType = ifelse(cyl > 6, "High", "Low"), wtton = 0.45*wt)
+
+# str(carData.new)
+summary(carData.new)
+```
+
+```{r}
+# Return the mean weight (in tons) of the cars.
+carData.new %>% summarize(meanweight = mean(wtton))
+
+# Return the mean data of two columns
+carData.new %>% summarize(meanweight = mean(wtton), meandisplacement = mean(disp))
+
+```
+
+```{r}
+# Group the data 
+
+carData.new %>% group_by(cylType) %>% 
+summarize(meanweight = mean(wtton), meandisplacement = mean(disp))
+
+```
+
+```{r}
+# Filter function is used to retain samples satisfying a specific condition
+
+
+# Filter and print cars with weight more than 2 tons
+heavy_cars <- carData.new %>% filter(wtton > 2)
+print(heavy_cars)
+
+# Filter and print cars with weight more than 2 tons, more than 4 cylinders, and mpg greater than 11
+heavy_multi_cyl_cars <- carData.new %>% filter(wtton > 2, cyl > 4, mpg > 11)
+print(heavy_multi_cyl_cars)
+
+
+
+```
+
+```{r}
+# Select and print only the wtton column
+selected_wtton <- carData.new %>% select(wtton)
+print(selected_wtton)
+
+# Select and print all columns except wtton
+selected_except_wtton <- carData.new %>% select(-wtton)
+print(selected_except_wtton)
+
+# Select and print only the cylType and wtton columns
+selected_cylType_wtton <- carData.new %>% select(cylType, wtton)
+print(selected_cylType_wtton)
+
+
+
+```
+
+```{r}
+
+# Initiate ggplot with carData
+ggplot(data = carData)
+
+# Alternatively, assign the initial ggplot object to carPlot
+carPlot = ggplot(data = carData)
+
+
+
+
+
+```
+```{r}
+# Initialize ggplot with carData, setting aesthetics within aes()
+carPlot <- ggplot(data = carData, aes(x = wt, y = disp))
+
+# Add a scatter plot layer
+carPlot <- carPlot + geom_point()
+
+# add labels and titles
+carPlot = carPlot + labs(x = 'Weight (1000 lbs)', y = 'Displacement(cu. in)', title = 'Displacement vs weight')
+carPlot
+```
+

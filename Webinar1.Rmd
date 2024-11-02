@@ -21,7 +21,6 @@ library(dplyr)
 
 ```{r}
 
-
 num_vec <- c(1.2, 3.5, 7.8)
 # print(num_vec)
 num_vec2 = seq(1, 10, by = 0.5)
@@ -41,32 +40,29 @@ char_vec <- c("apple", "banana", "cherry")
 log_vec <- c(TRUE, FALSE, TRUE)
 # print(log_vec)
 
-
-
-
-
 ```
 
+## Create a 2D matrix with 2 rows and 3 columns
+
 ```{r}
+matrix_2d = matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, ncol = 3)
+print(matrix_2d) # Print the matrix
 
+# Accesses the element in the first row, second column (returns 3)
+matrix_2d[1, 2]  
+```
 
+## Create a 2D matrix filled by rows
 
-# Create a 2D matrix with 2 rows and 3 columns
-matrix_2d = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3)
-
-# Print the matrix
-print(matrix_2d)
-
-
-# Create a 2D matrix filled by rows
+```{r}
 matrix_2d_byrow <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
 
 # Print the matrix
 print(matrix_2d_byrow)
 
 
-matrix_2d[1, 2]  # Accesses the element in the first row, second column (returns 3)
-
+# Accesses the element in the first row, second column (returns 3)
+matrix_2d_byrow[1, 2]  
 ```
 
 ```{r}
@@ -88,6 +84,8 @@ print(matrix_cbind)
 
 # Create a 3x3 matrix
 mat <- matrix(1:9, nrow = 3, byrow = TRUE)
+
+print(mat)
 
 # Extract the first row as a vector
 first_row_vector <- mat[1, ]

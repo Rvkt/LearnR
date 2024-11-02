@@ -1,0 +1,258 @@
+---
+title: "Webinar-2 October 5 2024"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+#### Execute the following cells to load the libraries
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+#### Load the food texture dataset
+```{r}
+#file = 'http://openmv.net/file/food-texture.csv'
+file = 'Data/food-texture.csv'
+foodData = read.csv(?, header = ?, row.names = ?, stringsAsFactors = ?)
+head(foodData, 2)
+str(foodData)
+```
+
+#### Modify Crispy column to reflect high (0) or low (1) crispiness
+```{r}
+foodData = foodData %>% mutate(Crispylevel = ifelse(?, ?, ?))
+```
+
+##### Change Crispy and Crispylevel columns to factor (categorical) type
+```{r}
+# Continuous features -> Oil, Density, Hardness, Fracture
+# Categorical features -> Crispy (8 levels 8 through 15) and Crispylevel (2 levels 0 and 1)
+# Crispy is a categorical feature with an order
+str(foodData)
+categorical_cols = c(?, ?)
+foodData[categorical_cols] = lapply(foodData[?], ?)
+str(foodData)
+```
+
+#### Visualize the Oil Percentage feature (continuous) using a histogram
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(x = ?), binwidth = ?, color = ?)
+p
+```
+
+#### Visualize the Oil Percentage feature (continuous) for Crispy value 10 food items using a histogram
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(x = ?), binwidth = ?, color = ?)
+p
+```
+
+#### Scatter plot between Oil Percentage and Density (relating two continuous variables)
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(x = ?, y = ?), color = ?) +
+  labs(x = ?, y = ?, title = ?)
+p
+```
+
+#### Scatter plot between OilPercentage and Density color coded with Crispylevel
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(x = ?, y = ?, color = ?)) +
+  labs(x = 'Density', y = 'Oil percentage', title = 'Pastry Analysis')
+p
+```
+
+#### Smooth line plot using ggplot
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(x = ?, y = ?))
+p
+```
+
+#### Plot the distribution of Crispy values (categorical variable)
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(x = ?))
+p
+```
+
+#### Summarizing sample data: mean, variance, standard deviation, median, percentiles, and quantiles
+```{r}
+
+```
+
+#### Visualize the Oil percentage feature using a box plot
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(y = ?))
+p
+```
+
+#### Visualize the Oil percentage feature for different Crispylevel values using box plots
+```{r}
+p = ggplot(data = ?) +
+  geom_?(aes(x = ?, y = ?))
+p
+```
+
+#### Load the bodyfat dataset
+```{r}
+# Load the bodyfat dataset
+file = 'Data/bodyfat.csv'
+df = read.csv(file, header = TRUE, row.names = 1, stringsAsFactors = F)
+str(df)
+head(df, n = 2)
+```
+
+#### Create lists of categorical and continuous features
+```{r}
+# Create lists of categorical and continuous features
+features = colnames(df)
+categorical_features = c(?)
+continuous_features = features[?]
+```
+
+#### Convert categorical columns to correct type
+```{r}
+# Convert categorical columns to correct type
+df[categorical_features] = lapply(df[categorical_features], as.factor)
+str(df)
+```
+
+#### Plot the distribution of males and females in the dataset
+```{r}
+# Plot the distribution of males and females in the dataset
+p = ggplot(data = ?) +
+  geom_bar(aes(x = ?), color = ?, fill = ?) +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+  axis.text = element_text(size = 12),
+  axis.text.x = element_text(size = 14),
+  axis.text.y = element_text(size = 14),
+  axis.title = element_text(size = 14, face = "bold"))+
+  labs(x = 'Gender',
+       y = 'Frequency',
+       title = 'Distribution of Genders')
+p
+#p+coord_flip()
+```
+
+#### Plot a component plot of weight values
+```{r}
+# Plot a component plot of weight values
+p = ggplot(data = ?) +
+  geom_point(aes(x = ?, y = ?), color = 'blue') +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+  axis.text = element_text(size = 12),
+  axis.text.x = element_text(size = 14),
+  axis.text.y = element_text(size = 14),
+  axis.title = element_text(size = 14, face = "bold"))+
+  labs(x = 'Patient #',
+       y = 'Weight (kg)',
+       title = 'Component Plot of Weights')
+p
+```
+
+#### Plot a histogram of weight values
+```{r}
+# Plot a histogram of weight values
+mean_weight = mean(df$Weight)
+sd_weight = sd(df$Weight)
+p = ggplot(data = df) +
+  geom_histogram(aes(x = ?, y = ?),
+  breaks = seq(mean_weight-3*sd_weight, mean_weight+3*sd_weight, by = 2.0),
+  colour = 'black', fill = 'steelblue', alpha = 0.4) +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
+  axis.text = element_text(size = 12),
+  axis.text.x = element_text(size = 10),
+  axis.text.y = element_text(size = 10))+
+  labs(x = 'Weight (kg)',
+       y = 'Frequency',
+       title = 'Frequency Histogram of Weights')
+p
+```
+
+#### Plot a histogram of height values
+```{r}
+```
+
+#### Plot a histogram of bodyfat values
+```{r}
+```
+
+#### Plot a histogram of weights for both genders
+```{r}
+# Plot a histogram of weights for both genders
+p = ggplot(data = ?) +
+  geom_histogram(aes(x = ?, y = ?, color = ?), alpha = ?) +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+  axis.text = element_text(size = 12),
+  axis.text.x = element_text(size = 14),
+  axis.text.y = element_text(size = 14),
+  axis.title = element_text(size = 14, face = "bold"))+
+  labs(x = 'Weight (kg)',
+       y = 'Frequency',
+       title = 'Frequency Histogram of Weights for Males and Females')
+p
+```
+
+#### Plot a boxplot of bodyfat values
+```{r}
+# Plot a boxplot of bodyfat values
+p = ggplot(data = ?) +
+  geom_boxplot(aes(y = ?)) +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+  axis.text = element_text(size = 12),
+  axis.text.x = element_text(size = 14),
+  axis.text.y = element_text(size = 14),
+  axis.title = element_text(size = 14, face = "bold"))+
+  labs(title = 'Bodyfat Distribution')
+p
+```
+
+#### Plot a boxplot of bodyfat values for both genders
+```{r}
+# Plot a boxplot of bodyfat values for both genders
+p = ggplot(data = ?) +
+  geom_boxplot(aes(x = ?, y = ?)) +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+  axis.text = element_text(size = 12),
+  axis.text.x = element_text(size = 14),
+  axis.text.y = element_text(size = 14),
+  axis.title = element_text(size = 14, face = "bold"))+
+  labs(title = 'Bodyfat Distribution for Males and Females')
+p
+```
+
+#### Introduce a new categorical column in the dataframe called 'Weightlevel' with the following levels: (1) low (< 25th percentile of weights) (2) medium (in the IQR of weights) (3) high (>75th percentile of weights)
+```{r}
+# Introduce a new categorical column in the dataframe called weight level with the following levels: (1) low (< 25th percentile of weights) (2) medium (in between the 25th and 75th percentiles of weights) (3) high (> 75th percentile of weights)
+df['Weightlevel'] = df['Weight'] %>% mutate
+```
+
+#### Plot a boxplot of bodyfat values for both genders across the three Weightlevel groups
+```{r}
+# Plot a boxplot of bodyfat values for both genders both genders across the three Weightlevel groups
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
